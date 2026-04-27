@@ -9,7 +9,27 @@ void yyerror(const char *msg);
 
 %}
 
+%token EOL 0
+%token NUM
+%token PLUS
+%token MINUS
+%token TIMES
+%token DIV
+%token LPAREN
+%token RPAREN
+%token ASSIGN
+%token COMMA
+%token IDENT
+%token STRING
+%token PRINT
+%token CONCAT
+%token LENGHT
+
 %token ERROR
+
+/* precedência e associatividade */
+%left PLUS MINUS
+%left TIMES DIV
 
 %start program
 
@@ -31,8 +51,27 @@ stmt
 | expr
 ;
 
+exprlist
+: term
+| term COMMA exprlist
+;
+
+
 expr
-/* completar */
+: expr PLUS expr
+| expr MINUS expr
+| expr TIMES expr
+| expr DIV expr
+| LPAREN expr RPAREN
+| CONCAT LPAREN exprlist RPAREN
+| term
+;
+
+term
+: NUM
+| IDENT
+| STRING
+;
 
 %%
 
