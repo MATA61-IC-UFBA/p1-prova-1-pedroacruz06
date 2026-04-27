@@ -26,13 +26,13 @@ int yylex();
 "concat" {return CONCAT;}               // concatenar string
 "lenght" {return LENGHT;}               // comprimento de string
 
-"\"[^\n]*\"" {return STRING;}           // string entre aspas
+\"[^\n]*\" {return STRING;}           // string entre aspas
 [a-zA-Z][a-zA-Z0-9_]* {return IDENT;}   // variavel id
 
-"//"[^\n]* ;                            // comentarios de uma linha
+"//"[^\n]* {return COMMENT;} ;                            // comentarios de uma linha
 [ \t] ;
 
-"\n"    {return EOL;}
+
 
 .       { return ERROR; }
 
