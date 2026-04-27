@@ -11,9 +11,29 @@ int yylex();
 
 %%
 
-/* copiar E2 e fazer as extensões */
+[0-9]+\.?[0-9]+|[0-9]+ {return NUM;}
+"-" {return MINUS;}
+"+" {return PLUS;}
+"*" {return TIMES;}
+"/" {return DIV;}
+"(" {return LPAREN;}
+")" {return RPAREN;}
 
+"=" {return ASSIGN;}                    // atribuicao
+"," {return COMMA;}                     // virgula para concatenar
 
-.            { return ERROR; }
+"print" {return PRINT;}                 // print
+"concat" {return CONCAT;}               // concatenar string
+"lenght" {return LENGHT;}               // comprimento de string
+
+"\"[^\n]*\"" {return STRING;}           // string entre aspas
+[a-zA-Z][a-zA-Z0-9_]* {return IDENT;}   // variavel id
+
+"//"[^\n]* ;                            // comentarios de uma linha
+[ \t] ;
+
+"\n"    {return EOL;}
+
+.       { return ERROR; }
 
 %%
