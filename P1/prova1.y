@@ -9,7 +9,7 @@ void yyerror(const char *msg);
 
 %}
 
-%token EOL 0
+%token EOL
 %token NUM
 %token PLUS
 %token MINUS
@@ -24,6 +24,7 @@ void yyerror(const char *msg);
 %token PRINT
 %token CONCAT
 %token LENGHT
+%token COMMENT
 
 %token ERROR
 
@@ -37,7 +38,7 @@ void yyerror(const char *msg);
 
 /* programa */
 program
-: stmt_list 
+: stmt_list
 ;
 
 stmt_list
@@ -48,12 +49,13 @@ stmt_list
 stmt
 : IDENT ASSIGN expr
 | PRINT LPAREN exprlist RPAREN
+| COMMENT
 | expr
 ;
 
 exprlist
-: term
-| term COMMA exprlist
+: expr
+| expr COMMA exprlist
 ;
 
 
@@ -64,6 +66,7 @@ expr
 | expr DIV expr
 | LPAREN expr RPAREN
 | CONCAT LPAREN exprlist RPAREN
+| LENGHT LPAREN term RPAREN
 | term
 ;
 
@@ -74,4 +77,3 @@ term
 ;
 
 %%
-
