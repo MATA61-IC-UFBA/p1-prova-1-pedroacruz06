@@ -30,7 +30,7 @@ int yylex();
 [a-zA-Z][a-zA-Z0-9_]* {return IDENT;}   // variavel id
 
 "//"[^\n]* {return COMMENT;} ;                            // comentarios de uma linha
-[ \t] ;
+[ \t\r\n]+ ;
 
 
 
